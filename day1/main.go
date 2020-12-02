@@ -30,6 +30,20 @@ func partOne(expenses []int) (int, error) {
 	}
 	return 0, errors.New("Not found")
 }
+
+func partTwo(expenses []int) (int, error) {
+	for i := 0; i < len(expenses)-2; i++ {
+		for j := i + 1; j < len(expenses)-1; j++ {
+			for k := j + 1; k < len(expenses); k++ {
+				if expenses[i]+expenses[j]+expenses[k] == 2020 {
+					return expenses[i] * expenses[j] * expenses[k], nil
+				}
+			}
+		}
+	}
+	return 0, errors.New("Not found")
+}
+
 func main() {
 	input, err := os.Open("./day1/input.txt")
 	if err != nil {
@@ -45,4 +59,9 @@ func main() {
 		panic(err)
 	}
 	fmt.Printf("Part 1 result: %v\n", res)
+	res, err = partTwo(expenses)
+	if err != nil {
+		panic(err)
+	}
+	fmt.Printf("Part 2 result: %v\n", res)
 }
